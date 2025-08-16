@@ -41,6 +41,8 @@ import MyPayments from "../Pages/Dasboard/Studen Dashoard/MyPayments";
 import SeeDetails from "../Pages/Dasboard/SeeDetails";
 import CreateAssignment from "../Pages/Dasboard/TeacherAddclass/CreateAssignment";
 import EnrollClassDetails from "../Pages/Dasboard/Studen Dashoard/EnrollClassDetails";
+import About from "../Pages/Home/About";
+import ContactUs from "../Pages/Home/ContactUs";
 
 
 
@@ -60,6 +62,15 @@ export const router = createBrowserRouter([
       {
         path: 'allclass',
         Component: AllClass,
+      },
+      {
+        path: 'about',
+        Component: About,
+      },
+
+      {
+        path: 'contact',
+        Component: ContactUs,
       },
 
       {
@@ -159,7 +170,7 @@ export const router = createBrowserRouter([
       {
 
         path: 'teacher-request',
-      element:<AdminRoute><TeacherRequest></TeacherRequest></AdminRoute>
+        element: <AdminRoute><TeacherRequest></TeacherRequest></AdminRoute>
       },
       {
 
@@ -186,17 +197,17 @@ export const router = createBrowserRouter([
       },
       {
         path: 'pending-teachers',
-       element: <AdminRoute>
+        element: <AdminRoute>
           <PendingTeachers></PendingTeachers>
         </AdminRoute>
       },
 
       {
         path: 'active-teachers',
-       element: <AdminRoute>
+        element: <AdminRoute>
 
           <ActiveTeachers></ActiveTeachers>
-       </AdminRoute>
+        </AdminRoute>
 
       },
       {
