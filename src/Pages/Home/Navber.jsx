@@ -39,9 +39,7 @@ const Navbar = () => {
   const privateNavItems = (
     <>
       {publicNavItems}
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
+
       <li>
         <NavLink to="/teach">Teach on EduManage</NavLink>
       </li>
@@ -116,12 +114,7 @@ const Navbar = () => {
                     >
                       Dashboard
                     </Link>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      Profile
-                    </Link>
+
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
