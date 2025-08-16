@@ -43,6 +43,7 @@ import CreateAssignment from "../Pages/Dasboard/TeacherAddclass/CreateAssignment
 import EnrollClassDetails from "../Pages/Dasboard/Studen Dashoard/EnrollClassDetails";
 import About from "../Pages/Home/About";
 import ContactUs from "../Pages/Home/ContactUs";
+import ErrorPage from "../layouts/Errorpage";
 
 
 
@@ -54,6 +55,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayots,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,

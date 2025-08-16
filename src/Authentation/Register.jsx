@@ -24,6 +24,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const result = await createUser(data.email, data.password);
+      console.log("User created successfully:", result);
       const userProfile = {
         displayName: data.name,
         photoURL: profilePic,
