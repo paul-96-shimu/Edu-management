@@ -3,13 +3,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import CustomHooks from '../Hooks/CustomHooks';
-import { Link } from 'react-router'; // ✅ fix import
+import { Link } from 'react-router';
 import Sociallogin from './Sociallogin';
 import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import UseAxios from '../Hooks/UseAxios';
-
-
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,8 +15,8 @@ const Register = () => {
   const [profilePic, setProfilePic] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const axiosSecure = UseAxios();
 
-  const axiosSecure = UseAxios()
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -29,20 +27,20 @@ const Register = () => {
       const userProfile = {
         displayName: data.name,
         photoURL: profilePic,
-      
       };
-       console.log(result)
       await updateUserProfile(userProfile);
 
       const userInfo = {
         name: data.name,
-         email: data.email.toLowerCase(),
+        email: data.email.toLowerCase(),
         photoURL: profilePic,
         role: 'student',
+        phone: data.phone,
+        address: data.address,
         created_at: new Date().toISOString()
       };
 
-      await axiosSecure .post('/users', userInfo);
+      await axiosSecure.post('/users', userInfo);
       Swal.fire({ title: 'Registration Successful!', icon: 'success' }).then(() => navigate('/'));
     } catch (error) {
       Swal.fire("Error!", error.message, "error");
@@ -63,6 +61,7 @@ const Register = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-md w-full p-6 bg-white shadow-lg rounded-lg">
         <h1 className="text-3xl font-bold text-center mb-4">Create an Account</h1>
 
+        {/* Name */}
         <label className="label mt-2">Your Name</label>
         <input
           type="text"
@@ -72,9 +71,11 @@ const Register = () => {
         />
         {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
 
+        {/* Profile Picture */}
         <label className="label mt-2">Profile Picture</label>
         <input type="file" onChange={handleImageupload} className="input input-bordered w-full" />
 
+        {/* Email */}
         <label className="label mt-2">Email</label>
         <input
           type="email"
@@ -84,7 +85,31 @@ const Register = () => {
         />
         {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
 
-        {/* ✅ Password with Show/Hide */}
+
+
+
+
+        {/* Phone */}
+        <label className="label mt-4">Phone Number</label>
+        <input
+          type="tel"
+          {...register('phone', { required: true, pattern: /^[0-9]{10,15}$/ })}
+          className="input input-bordered w-full"
+          placeholder="Phone Number"
+        />
+        {errors.phone && <p className="text-red-500 text-sm">Enter a valid phone number</p>}
+
+        {/* Address */}
+        <label className="label mt-4">Address</label>
+        <textarea
+          {...register('address', { required: true })}
+          className="input input-bordered w-full h-24"
+          placeholder="Your Address"
+        ></textarea>
+        {errors.address && <p className="text-red-500 text-sm">Address is required</p>}
+
+
+        {/* Password */}
         <label className="label mt-4">Password</label>
         <div className="relative">
           <input
@@ -101,18 +126,28 @@ const Register = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
+        {errors.password?.type === 'required' && <p className="text-red-500 text-sm">Password is required</p>}
+        {errors.password?.type === 'minLength' && <p className="text-red-500 text-sm">Password must be at least 6 characters</p>}
+        {errors.password?.type === 'pattern' && <p className="text-red-500 text-sm">Must include 1 uppercase, 1 lowercase, and 1 number</p>}
 
-        {errors.password?.type === 'required' && (
-          <p className="text-red-500 text-sm">Password is required</p>
-        )}
-        {errors.password?.type === 'minLength' && (
-          <p className="text-red-500 text-sm">Password must be at least 6 characters</p>
-        )}
-        {errors.password?.type === 'pattern' && (
-          <p className="text-red-500 text-sm">
-            Must include 1 uppercase, 1 lowercase, and 1 number
-          </p>
-        )}
+        {/* Phone
+        <label className="label mt-4">Phone Number</label>
+        <input
+          type="tel"
+          {...register('phone', { required: true, pattern: /^[0-9]{10,15}$/ })}
+          className="input input-bordered w-full"
+          placeholder="Phone Number"
+        />
+        {errors.phone && <p className="text-red-500 text-sm">Enter a valid phone number</p>}
+
+        {/* Address */}
+        {/* <label className="label mt-4">Address</label>
+        <textarea
+          {...register('address', { required: true })}
+          className="input input-bordered w-full h-24"
+          placeholder="Your Address"
+        ></textarea>
+        {errors.address && <p className="text-red-500 text-sm">Address is required</p>} */}
 
         <button className="btn btn-primary w-full mt-6">Register</button>
 
@@ -127,9 +162,5 @@ const Register = () => {
     </div>
   );
 };
-
-
-
-
 
 export default Register;
