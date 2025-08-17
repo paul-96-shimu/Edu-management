@@ -6,10 +6,12 @@ import Footer from '../Pages/Footer';
 const RootLayots = () => {
     return (
         <div >
-            <div className='container mx-auto'>
+            <div>
 
                  <Navber></Navber>
-            <Outlet></Outlet>
+                 <div className='container mx-auto'>
+                     <Outlet></Outlet>
+                 </div>
 
             </div>
            
