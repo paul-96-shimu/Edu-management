@@ -29,7 +29,7 @@ const ContactUs = () => {
                             📧 Email: support@edumanage.com
                         </li>
                         <li>
-                            📞 Phone: +880 1234-567890
+                            📞 Phone/WhatsApp: +880 1234-567890
                         </li>
                     </ul>
                 </div>
