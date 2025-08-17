@@ -1,5 +1,6 @@
 import React from 'react';
 import EduLogo from '../Shared/EduLogo';
+import { FaFacebook, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
